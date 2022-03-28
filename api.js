@@ -23,22 +23,23 @@ const usersRouter = require('./routes/users_route');
 const platformsRouter = require('./routes/platforms_route');
 const containsRunRouter = require('./routes/contains_run_route');
 
-app.use('/api/games', gamesRouter);
-app.use('/api/game_types', gameTypesRouter);
-app.use('/api/suggestions', suggestionsRouter);
-app.use('/api/runs', runsRouter);
-app.use('/api/run_categories', runCatsRouter);
-app.use('/api/users', usersRouter);
-app.use('/api/platforms', platformsRouter);
-app.use('/api/contains_run', containsRunRouter);
+app.use('/games', gamesRouter);
+app.use('/game_types', gameTypesRouter);
+app.use('/suggestions', suggestionsRouter);
+app.use('/runs', runsRouter);
+app.use('/run_categories', runCatsRouter);
+app.use('/users', usersRouter);
+app.use('/platforms', platformsRouter);
+app.use('/contains_run', containsRunRouter);
 
 //The 404 Route (ALWAYS Keep this as the last route)
 app.get('*', (req, res) => {
-    res.status(404).render("error");
+    res.status(404);
+    res.json({ error: "Not found" })
 });
 
-app.listen(8000,function(){
-    console.log("Live at Port 8000");
+app.listen(5000,function(){
+    console.log("Live at Port 5000");
 });
 
 module.exports = app;
