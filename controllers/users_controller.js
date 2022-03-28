@@ -13,6 +13,11 @@ function logIn(req, res){
                 res.status(401).render("error");
             }else {
                 const token = auth.generateTokenForUser(values.rows[0].user_id)
+                const adm = (values.rows[0].user_access==1)
+                res.send({
+                    user : values.rows[0].user_name,
+                    isAdmin : adm
+                })
                 res.cookie("user",token,{httpOnly : false}).send()
                 console.log("Log in")
             }
@@ -27,6 +32,7 @@ function add_user(req, res) {
     const promise = model_users.postUser( name, mail, password)
     
     promise.then((values) => {
+
         res.send(values.rows)
     }).catch((error) => {
         console.error(error.message)
