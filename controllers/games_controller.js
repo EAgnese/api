@@ -44,7 +44,8 @@ function select_games_by_type(req, res) {
 }
 
 function select_games(req, res) {
-    console.log(req)
+    console.log(req.method)
+    console.log(req.url)
     console.log("demande tous les jeux")
     promise = model_games.getGames()
     promise.then((values) => {
