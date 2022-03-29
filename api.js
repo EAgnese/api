@@ -38,7 +38,7 @@ app.get('*', (req, res) => {
     res.json({ error: "Not found" })
 });
 
-app.listen(5000,function(){
+app.listen(process.env.PORT || 5000,function(){
     console.log("Live at Port 5000");
 });
 
