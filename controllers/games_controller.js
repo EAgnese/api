@@ -47,6 +47,7 @@ function select_games(req, res) {
     promise = model_games.getGames()
     promise.then((values) => {
         res.send(values.rows)
+        console.log("tous les jeux recup")
     }).catch((error) => {
         console.error(error.message)
     })

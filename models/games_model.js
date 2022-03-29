@@ -72,6 +72,7 @@ function getGames(){
                 console.error(err.message);
             }
             else{
+                console.log("bd envoie données sur GAMES")
                 resolve(result);
             }
         });
