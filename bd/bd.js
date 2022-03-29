@@ -3,13 +3,11 @@ const { Pool } = require("pg");
 const fs = require("fs");
 require('dotenv').config()
 
-
 const isProduction = process.env.NODE_ENV === 'production'
 const pool = new Pool({
     connectionString: isProduction ? process.env.DATABASE_URL : connectionString,
     ssl: isProduction,
 });
-
 
 console.log("Connexion réussie à la base de données");
 
