@@ -4,7 +4,7 @@
   "description": "",
   "main": "api.js",
   "scripts": {
-    "start": "node api.js"
+    "start": "NODE_TLS_REJECT_UNAUTHORIZED='0' node api.js"
   },
   "repository": {
     "type": "git",
