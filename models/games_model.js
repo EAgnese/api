@@ -66,8 +66,9 @@ function getGamesByType(type){
 
 function getGames(){
     return new Promise((resolve, reject) => {
-        console.log("demande données sur GAMES")
         const sql = "SELECT * FROM GAMES"
+        console.log(sql)
+        console.log(pool)
         pool.query(sql, [], (err, result) => {
             if (err){
                 console.error(err.message);
