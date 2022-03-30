@@ -1,6 +1,6 @@
 const model_users = require("../models/users_model")
 const bcrypt = require("bcryptjs")
-const global = require("../global.js")
+const global = require("../global")
 
 
 function logIn(req, res){
