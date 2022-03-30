@@ -4,8 +4,12 @@ const path = require('path');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const cookieParser = require("cookie-parser")
+const {randomBytes} = require("crypto")
 
 let corsOptions = {origin:'*'};
+
+const cookie_secret = "dashldhe128ewhgcvasdy7et2hvhwytt2"
+let SESSIONS = {}
 
 app.use(cookieParser());
 app.use(cors(corsOptions));

@@ -4,25 +4,26 @@ const auth = require("../token.js");
 
 
 function logIn(req, res){
-    model_users.getUserByName(req.body.name).then((values) =>{
-        if (!values) {
-            res.status(404).render("error");
-        }else {
-            const passwordisvalid = bcrypt.compareSync(req.body.password,values.rows[0].user_password)
-            if (!passwordisvalid) {
-                res.status(401).render("error");
+    if (SESSIONS.hasOwnProperty(req.cookies.sessionId)){
+        res.status(401).send("Error 401 : Unauthorized")
+    }else {
+        model_users.getUserByName(req.body.name).then((values) =>{
+            if (!values) {
+                res.status(404).render("error");
             }else {
-                const token = auth.generateTokenForUser(values.rows[0].user_id)
-                const adm = (values.rows[0].user_access==1)
-                res.send({
-                    user : values.rows[0].user_name,
-                    isAdmin : adm
-                })
-                res.cookie("user",token,{httpOnly : false}).send()
-                console.log("Log in")
+                const passwordisvalid = bcrypt.compareSync(req.body.password,values.rows[0].user_password)
+                if (!passwordisvalid) {
+                    res.status(401).render("error");
+                }else {
+                    const nextSessionId = randomBytes(16).toString('base64')
+                    res.cookie('sessionId', nextSessionId)
+                    SESSIONS[nextSessionId] = [values.rows[0].user_name,(values.rows[0].user_access == 1)]
+                    res.send([values.rows[0].user_name,(values.rows[0].user_access == 1)]) 
+                    console.log("Log in")
+                }
             }
-        }
-    }) 
+        }) 
+    }
 }
 
 function add_user(req, res) {
@@ -33,7 +34,7 @@ function add_user(req, res) {
     
     promise.then((values) => {
 
-        res.send(values.rows)
+        res.status(200).send(values.rows)
     }).catch((error) => {
         console.error(error.message)
     })
