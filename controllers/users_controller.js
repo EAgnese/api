@@ -1,6 +1,5 @@
 const model_users = require("../models/users_model")
 const bcrypt = require("bcryptjs")
-const auth = require("../token.js");
 
 
 function logIn(req, res){
