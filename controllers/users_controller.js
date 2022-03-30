@@ -27,6 +27,15 @@ function logIn(req, res){
     }
 }
 
+function logOut(req, res) {
+    const sessionId = req.cookies.sessionId
+    if (sessionId){
+        delete global.SESSIONS[sessionId]
+    }
+    console.log("Log out")
+    res.clearCookie('sessionId')
+}
+
 function add_user(req, res) {
     const name = req.body.name;
     const mail = req.body.mail;
@@ -125,5 +134,6 @@ module.exports = {
     update_user,
     remove_user,
     logIn,
+    logOut
 }
 
