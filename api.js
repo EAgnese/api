@@ -7,8 +7,8 @@ const cookieParser = require("cookie-parser")
 
 let corsOptions = {origin:'*'};
 
-
-app.use(cookieParser());
+const cookie_secret = "dashldhe128ewhgcvasdy7et2hvhwytt2"
+app.use(cookieParser(cookie_secret));
 app.use(cors(corsOptions));
 
 app.set('views', path.join(__dirname, 'views'));
