@@ -6,7 +6,7 @@ function add_contains_run(req, res) {
     const promise = model_contains.postContains(run_cat,game)
     
     promise.then((values) => {
-        res.send(values.rows)
+        res.status(200).send(values.rows)
     }).catch((error) => {
         console.error(error.message)
     })
@@ -16,7 +16,7 @@ function select_games_by_run_cat(req, res) {
     const id = req.params.id;
     promise = model_contains.getGamesByRunCat(id)
     promise.then((values) => {
-        res.send(values.rows)
+        res.status(200).send(values.rows)
     }).catch((error) => {
         console.error(error.message)
     })
@@ -29,7 +29,7 @@ function select_run_cats_by_game(req, res) {
     const type_code = req.body.type_code;
     promise = model_contains.getRunCatsByGame(id, libelle, image, type_code)
     promise.then((values) => {
-        res.send(values.rows)
+        res.status(200).send(values.rows)
     }).catch((error) => {
         console.error(error.message)
     })
@@ -40,7 +40,7 @@ function remove_contains_run(req, res) {
     const game = req.body.game;
     promise = model_contains.deleteContains(run_cat,game)
     promise.then((values) => {
-        res.send(values.rows)
+        res.status(200).send(values.rows)
     }).catch((error) => {
         console.error(error.message)
     })

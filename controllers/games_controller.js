@@ -7,7 +7,7 @@ function add_game(req, res) {
     const promise = model_games.postGame(libelle, image, type_code)
     
     promise.then((values) => {
-        res.send(values.rows)
+        res.status(200).send(values.rows)
     }).catch((error) => {
         console.error(error.message)
     })
@@ -17,7 +17,7 @@ function select_game_by_id(req, res) {
     const id = req.params.id;
     promise = model_games.getGameById(id)
     promise.then((values) => {
-        res.send(values.rows)
+        res.status(200).send(values.rows)
     }).catch((error) => {
         console.error(error.message)
     })
@@ -26,7 +26,7 @@ function select_game_by_id(req, res) {
 function select_game_by_name(req, res) {
     const name = req.params.name;
     promise = model_games.getGameByName(name)
-    promise.then((values) => {
+    promise.status(200).then((values) => {
         res.send(values.rows)
     }).catch((error) => {
         console.error(error.message)
@@ -37,7 +37,7 @@ function select_games_by_type(req, res) {
     const type = req.params.type;
     promise = model_games.getGamesByType(type)
     promise.then((values) => {
-        res.send(values.rows)
+        res.status(200).send(values.rows)
     }).catch((error) => {
         console.error(error.message)
     })
@@ -49,7 +49,7 @@ function select_games(req, res) {
     console.log("demande tous les jeux")
     promise = model_games.getGames()
     promise.then((values) => {
-        res.send(values.rows)
+        res.status(200).send(values.rows)
         console.log("tous les jeux recup")
     }).catch((error) => {
         console.error(error.message)
@@ -62,7 +62,7 @@ function update_game(req, res) {
     const image = req.body.image;
     const type_code = req.body.type_code;
     promise = model_games.putGame(id, libelle, image, type_code)
-    promise.then((values) => {
+    promise.status(200).then((values) => {
         res.send(values.rows)
     }).catch((error) => {
         console.error(error.message)
@@ -73,7 +73,7 @@ function remove_game(req, res) {
     const id = req.params.id;
     promise = model_suggestions.deleteGame(id)
     promise.then((values) => {
-        res.send(values.rows)
+        res.status(200).send(values.rows)
     }).catch((error) => {
         console.error(error.message)
     })
