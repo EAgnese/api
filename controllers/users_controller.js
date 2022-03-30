@@ -1,9 +1,10 @@
 const model_users = require("../models/users_model")
 const bcrypt = require("bcryptjs")
+const global = require("../global.js")
 
 
 function logIn(req, res){
-    if (SESSIONS.hasOwnProperty(req.cookies.sessionId)){
+    if (global.SESSIONS.hasOwnProperty(req.cookies.sessionId)){
         res.status(401).send("Error 401 : Unauthorized")
     }else {
         model_users.getUserByName(req.body.name).then((values) =>{
@@ -14,7 +15,7 @@ function logIn(req, res){
                 if (!passwordisvalid) {
                     res.status(401).render("error");
                 }else {
-                    const nextSessionId = randomBytes(16).toString('base64')
+                    const nextSessionId = global.randomBytes(16).toString('base64')
                     res.cookie('sessionId', nextSessionId)
                     SESSIONS[nextSessionId] = [values.rows[0].user_name,(values.rows[0].user_access == 1)]
                     res.send([values.rows[0].user_name,(values.rows[0].user_access == 1)]) 
