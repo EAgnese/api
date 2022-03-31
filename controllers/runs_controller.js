@@ -81,6 +81,8 @@ function update_run(req, res) {
 
 function remove_run(req, res) {
     const id = req.params.id;
+    console.log(req.method)
+    console.log(req.url)
     promise = model_runs.deleteRun(id)
     promise.then((values) => {
         res.status(200).send(values.rows)
