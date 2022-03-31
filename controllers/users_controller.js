@@ -9,16 +9,15 @@ function logIn(req, res){
     }else {
         model_users.getUserByName(req.body.name).then((values) =>{
             if (!values) {
-                res.status(404).render("error");
+                res.status(422).render("Error 422 : Unprocessable");
             }else {
                 const passwordisvalid = bcrypt.compareSync(req.body.password,values.rows[0].user_password)
                 if (!passwordisvalid) {
-                    res.status(401).render("error");
+                    res.status(401).render("Error 401 : Unauthorized");
                 }else {
                     const nextSessionId = global.randomBytes(16).toString('base64')
                     res.cookie('sessionId', nextSessionId)
                     global.SESSIONS[nextSessionId] = [values.rows[0].user_name,(values.rows[0].user_access == 1)]
-                    console.log(global.SESSIONS)
                     res.send([values.rows[0].user_name,(values.rows[0].user_access == 1)]) 
                     console.log("Log in")
                 }

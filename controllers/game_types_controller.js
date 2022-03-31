@@ -24,8 +24,8 @@ function select_game_types(req, res) {
 function select_game_type_by_id(req, res) {
     const id = req.params.id;
     promise = model_game_type.getGameTypeById(id)
-    promise.status(200).then((values) => {
-        res.send(values.rows)
+    promise.then((values) => {
+        res.status(200).send(values.rows)
     }).catch((error) => {
         console.error(error.message)
     })
