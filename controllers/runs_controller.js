@@ -47,8 +47,8 @@ function select_runs_by_plat(req, res) {
 
 function select_runs_by_game(req, res) {
     console.log("req.param")
-    console.log(req.param)
-    const cat = req.params.cat;
+    console.log(req.param.game)
+    const cat = req.params.game;
     promise = model_runs.getRunsByGame(cat)
     promise.then((values) => {
         res.status(200).send(values.rows)
