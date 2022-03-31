@@ -18,7 +18,7 @@ function logIn(req, res){
                     const nextSessionId = global.randomBytes(16).toString('base64')
                     res.cookie('sessionId', nextSessionId)
                     global.SESSIONS[nextSessionId] = [values.rows[0].user_name,(values.rows[0].user_access == 1)]
-                    res.send([values.rows[0].user_name,(values.rows[0].user_access == 1)]) 
+                    res.send({ name : values.rows[0].user_name, isAdmin :(values.rows[0].user_access == 1)}) 
                     console.log("Log in")
                 }
             }
