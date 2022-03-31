@@ -73,7 +73,6 @@ function getRunsByGame(cat){
                 console.error(err.message);
             }
             else{
-                console.log(result)
                 resolve(result);
             }
         });
