@@ -5,8 +5,7 @@ const middleware_runs = require("../middleware.js")
 
 router.post("/", controller_users.add_user);
 router.post("/login", controller_users.logIn);
-router.post("/logout", controller_users.logOut);
-router.get('/logout',controller_users.logOut)
+router.post("/logout",[middleware_runs.verify_auth], controller_users.logOut);
 router.get("/",[middleware_runs.verify_admin], controller_users.select_users);
 router.get("/:id", controller_users.select_user_by_id);
 router.get("/name/:name",[middleware_runs.verify_admin] ,controller_users.select_user_by_name);
